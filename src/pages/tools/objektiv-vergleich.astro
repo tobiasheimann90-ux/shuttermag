@@ -1,0 +1,49 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+	title="Objektiv-Vergleichs-Tool · SHUTTERMAG"
+	description="Geplantes Tool: Objektive nach Brennweite, Blende, System und Preis filtern und vergleichen."
+	noindex
+>
+	<section class="mx-auto max-w-3xl px-4 py-16">
+		<a href="/tools/" class="text-sm font-semibold text-accent hover:underline"> ← Alle Tools </a>
+
+		<span class="mt-4 inline-block rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500">
+			In Planung
+		</span>
+		<h1 class="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+			Objektiv-Vergleichs-Tool
+		</h1>
+		<p class="mt-4 max-w-xl text-slate-600">
+			Nutzer:innen filtern nach Brennweite, Blende, System (Mount) und Preis und vergleichen 2-3
+			Objektive direkt nebeneinander mit klaren Vor- und Nachteilen – analog zum{' '}
+			<a href="/kamera-finder/" class="font-semibold text-accent hover:underline">Kamera-Finder</a>.
+		</p>
+
+		<div class="mt-8 rounded-2xl border border-black/10 p-6">
+			<h2 class="text-sm font-semibold uppercase tracking-wider text-slate-500">
+				Was dafür noch fehlt
+			</h2>
+			<ul class="mt-4 space-y-3 text-sm text-slate-700">
+				<li>
+					<strong>Objektiv-Datenbank</strong> – analog zu <code class="text-xs">src/data/kameras.ts</code>,
+					mit Brennweite, max. Blende, Mount, Gewicht, Preis, Bildstabilisator etc. pro Objektiv
+				</li>
+				<li>
+					<strong>Zuordnung zu Kamerasystemen</strong> – welches Objektiv passt zu welchem Mount
+					(Sony E, Canon RF, Nikon Z, Fuji X, MFT)
+				</li>
+				<li>
+					<strong>Vergleichsansicht</strong> – UI für Nebeneinander-Vergleich von 2-3 Objektiven
+					(anders als die reine Filterliste beim Kamera-Finder)
+				</li>
+				<li>
+					<strong>Redaktionelle Einschätzung</strong> – kurze Vor-/Nachteile pro Objektiv, keine
+					reinen Rohdaten
+				</li>
+			</ul>
+		</div>
+	</section>
+</Layout>
