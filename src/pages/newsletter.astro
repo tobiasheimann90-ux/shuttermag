@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="Newsletter · SHUTTERMAG"
+	description="Einmal pro Woche: neue Artikel, eine Gear-Empfehlung und ein praktischer Tipp direkt ins Postfach."
+>
+	<section class="mx-auto max-w-3xl px-4 py-16">
+		<h1 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Newsletter</h1>
+		<p class="mt-4 max-w-xl text-slate-600">
+			Einmal pro Woche: 1-2 neue Artikel, eine Gear-Empfehlung und ein praktischer Tipp. Kein Spam,
+			jederzeit abbestellbar.
+		</p>
+
+		<form
+			id="newsletter-form"
+			class="mt-8 flex flex-col gap-3 rounded-2xl border border-black/10 p-6 sm:flex-row"
+		>
+			<input
+				type="email"
+				name="email"
+				required
+				placeholder="deine@email.de"
+				class="flex-1 rounded-full border border-black/10 px-4 py-2.5 text-sm focus:border-black focus:outline-none"
+			/>
+			<button
+				type="submit"
+				class="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-dark"
+			>
+				Anmelden
+			</button>
+		</form>
+		<p id="newsletter-hinweis" class="mt-3 hidden text-sm text-slate-500"></p>
+	</section>
+</Layout>
+
+<script>
+	// TODO: An echten E-Mail-Anbieter anbinden (z.B. Brevo/Mailcoach), sobald ausgewählt.
+	// Aktuell kein Versand - Formular zeigt nur eine Platzhalter-Rückmeldung.
+	const form = document.querySelector<HTMLFormElement>('#newsletter-form')!;
+	const hinweis = document.querySelector<HTMLParagraphElement>('#newsletter-hinweis')!;
+
+	form.addEventListener('submit', (event) => {
+		event.preventDefault();
+		hinweis.textContent = 'Newsletter-Anmeldung folgt in Kürze – Anbindung an den Versand ist noch in Arbeit.';
+		hinweis.classList.remove('hidden');
+	});
+</script>

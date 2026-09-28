@@ -1,0 +1,58 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import { ARTIKEL_TYPEN, KATEGORIEN } from '../site.config';
+
+interface Props {
+	artikel: CollectionEntry<'artikel'>;
+}
+
+const { artikel: entry } = Astro.props;
+const { title, description, kategorie, typ, heroImage, heroImageAlt, pubDate } = entry.data;
+const kategorieLabel = KATEGORIEN[kategorie]?.label ?? kategorie;
+const typLabel = ARTIKEL_TYPEN[typ] ?? typ;
+---
+
+<a
+	href={`/artikel/${entry.id}/`}
+	class="group flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-white transition hover:-translate-y-0.5 hover:shadow-lg"
+>
+	{
+		heroImage ? (
+			<div class="relative aspect-[4/3] w-full overflow-hidden bg-black">
+				<Image
+					src={heroImage}
+					alt={heroImageAlt ?? ''}
+					width={480}
+					height={360}
+					class="h-full w-full object-cover opacity-90 transition duration-300 group-hover:scale-105 group-hover:opacity-100"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
+				<div class="absolute inset-x-0 bottom-0 p-4">
+					<span
+						class="inline-block rounded-full bg-accent px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-white"
+					>
+						{kategorieLabel}
+					</span>
+					<h3 class="mt-2 text-lg leading-snug font-semibold text-white">{title}</h3>
+				</div>
+			</div>
+		) : (
+			<div class="flex aspect-[4/3] w-full flex-col justify-between bg-black p-5">
+				<span
+					class="inline-block w-fit rounded-full bg-accent px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-white"
+				>
+					{kategorieLabel}
+				</span>
+				<h3 class="text-lg leading-snug font-semibold text-white">{title}</h3>
+			</div>
+		)
+	}
+	<div class="flex flex-1 flex-col gap-2 p-4">
+		<div class="text-xs font-medium text-slate-500">{typLabel}</div>
+		<p class="line-clamp-2 text-sm text-slate-600">{description}</p>
+		<time datetime={pubDate.toISOString()} class="mt-auto pt-2 text-xs text-slate-400">
+			{pubDate.toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' })}
+		</time>
+	</div>
+</a>

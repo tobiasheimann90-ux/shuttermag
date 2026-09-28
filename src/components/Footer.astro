@@ -1,0 +1,49 @@
+---
+import { KATEGORIEN, SITE } from '../site.config';
+const year = new Date().getFullYear();
+const navKategorien = Object.entries(KATEGORIEN);
+---
+
+<footer class="bg-black text-white">
+	<div class="mx-auto max-w-6xl px-4 py-12">
+		<div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+			<div class="lg:col-span-2">
+				<img src="/logo-white.svg" alt="SHUTTERMAG" class="h-6 w-auto" />
+				<p class="mt-4 max-w-sm text-sm text-white/60">
+					{SITE.name} enthält Affiliate-Links. Wenn du über einen solchen Link einkaufst,
+					erhalten wir ggf. eine Provision – ohne zusätzliche Kosten für dich.
+				</p>
+			</div>
+			<div>
+				<h3 class="text-sm font-semibold uppercase tracking-wider text-white/40">Kategorien</h3>
+				<ul class="mt-4 space-y-2 text-sm">
+					{
+						navKategorien.map(([slug, { label }]) => (
+							<li>
+								<a href={`/kategorie/${slug}/`} class="text-white/70 transition hover:text-accent">
+									{label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+			<div>
+				<h3 class="text-sm font-semibold uppercase tracking-wider text-white/40">Rechtliches</h3>
+				<ul class="mt-4 space-y-2 text-sm">
+					<li>
+						<a href="/impressum/" class="text-white/70 transition hover:text-accent">Impressum</a>
+					</li>
+					<li>
+						<a href="/datenschutz/" class="text-white/70 transition hover:text-accent">
+							Datenschutz
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<p class="mt-12 border-t border-white/10 pt-6 text-xs text-white/40">
+			© {year} {SITE.name}
+		</p>
+	</div>
+</footer>

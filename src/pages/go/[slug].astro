@@ -1,0 +1,49 @@
+---
+// Statischer Redirect-Layer für Affiliate-Links: /go/<slug>/ -> echte Ziel-URL.
+// Ziel-URLs werden zentral in src/data/affiliate-links.ts gepflegt (siehe dort für Details).
+import { affiliateLinks } from '../../data/affiliate-links';
+import { SITE } from '../../site.config';
+
+export async function getStaticPaths() {
+	return Object.entries(affiliateLinks).map(([slug, link]) => ({
+		params: { slug },
+		props: { link },
+	}));
+}
+
+const { link } = Astro.props;
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex,nofollow" />
+		<title>Weiterleitung zu {link.haendler} · {SITE.name}</title>
+		<meta http-equiv="refresh" content={`0;url=${link.url}`} />
+		<link rel="canonical" href={link.url} />
+	</head>
+	<body
+		style="display:flex;min-height:100vh;align-items:center;justify-content:center;padding:0 1rem;text-align:center;font-family:system-ui,sans-serif;"
+	>
+		<div>
+			<p style="color:#64748b;font-size:0.875rem;">Du wirst weitergeleitet zu {link.haendler} …</p>
+			<a
+				href={link.url}
+				rel="sponsored nofollow noopener"
+				style="display:inline-block;margin-top:0.5rem;font-weight:600;color:#e26d4f;"
+			>
+				Klicke hier, falls die Weiterleitung nicht automatisch startet
+			</a>
+		</div>
+		<script define:vars={{ target: link.url }}>
+			// Guard: falls später Analytics (GA4 o.ä.) eingebunden wird, hier den Klick tracken,
+			// bevor die Weiterleitung erfolgt. Aktuell noch kein Analytics-Tool angebunden (offene Entscheidung).
+			if (typeof window.gtag === 'function') {
+				window.gtag('event', 'affiliate_click', { destination: target });
+			}
+			window.location.replace(target);
+		</script>
+	</body>
+</html>

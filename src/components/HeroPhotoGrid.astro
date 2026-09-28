@@ -1,0 +1,116 @@
+---
+// Dekoratives Foto-Grid für den Hero: Spalten scrollen endlos (CSS-only) langsam
+// rauf/runter, abwechselnde Richtung pro Spalte für einen leichten Parallax-Effekt.
+import { Image } from 'astro:assets';
+// Bewusst nur reine Stimmungs-/Reisefotos ohne Kamera-Bezug – Bilder, die auch in
+// Artikeln als heroImage laufen (Kamera-Gear), tauchen hier nicht auf.
+import klippen from '../content/artikel/_images/klippen-nebel-irland.jpg';
+import moench from '../content/artikel/_images/moench-holzbruecke.jpg';
+import fuji from '../content/artikel/_images/fuji-kawaguchiko-japan.jpg';
+import duenen from '../content/artikel/_images/duenen-wueste-fussspuren.jpg';
+import stadt from '../content/artikel/_images/stadt-hochhaus-himmel.jpg';
+import neon from '../content/artikel/_images/frau-restaurant-neonlicht.jpg';
+import alpen from '../content/artikel/_images/alpen-landschaft-dolomiten.jpg';
+import gemsbock from '../content/artikel/_images/gemsbock-wuestenduenen.jpg';
+import milchstrasse from '../content/artikel/_images/milchstrasse-nachthimmel.jpg';
+import affen from '../content/artikel/_images/affen-natur.jpg';
+
+const spalten = [
+	{ bilder: [klippen, alpen, fuji], richtung: 'up' as const, dauer: '32s' },
+	{ bilder: [moench, duenen, milchstrasse], richtung: 'down' as const, dauer: '26s' },
+	{ bilder: [stadt, neon, gemsbock, affen], richtung: 'up' as const, dauer: '38s' },
+];
+---
+
+<div class="hero-photo-grid" aria-hidden="true">
+	{
+		spalten.map((spalte) => (
+			<div class="spalte">
+				<div
+					class={`spalte-track spalte-track--${spalte.richtung}`}
+					style={`animation-duration: ${spalte.dauer};`}
+				>
+					{[...spalte.bilder, ...spalte.bilder].map((bild) => (
+						<div class="kachel">
+							<Image src={bild} alt="" width={220} height={260} class="kachel-bild" />
+						</div>
+					))}
+				</div>
+			</div>
+		))
+	}
+</div>
+
+<style>
+	.hero-photo-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 0.75rem;
+		height: 260px;
+		overflow: hidden;
+		border-radius: 1rem;
+		transform: rotate(4deg) scale(1.12);
+		mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+		-webkit-mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+	}
+
+	@media (min-width: 640px) {
+		.hero-photo-grid {
+			height: 420px;
+		}
+	}
+
+	.spalte {
+		height: 100%;
+		overflow: hidden;
+	}
+
+	.spalte-track {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		animation-name: scroll-up;
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
+	}
+
+	.spalte-track--down {
+		animation-name: scroll-down;
+	}
+
+	.kachel {
+		border-radius: 0.75rem;
+		overflow: hidden;
+	}
+
+	.kachel-bild {
+		display: block;
+		width: 100%;
+		height: 200px;
+		object-fit: cover;
+	}
+
+	@keyframes scroll-up {
+		from {
+			transform: translateY(0);
+		}
+		to {
+			transform: translateY(-50%);
+		}
+	}
+
+	@keyframes scroll-down {
+		from {
+			transform: translateY(-50%);
+		}
+		to {
+			transform: translateY(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.spalte-track {
+			animation: none;
+		}
+	}
+</style>

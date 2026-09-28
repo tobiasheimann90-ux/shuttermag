@@ -1,0 +1,81 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import ArtikelCard from '../components/ArtikelCard.astro';
+import HeroPhotoGrid from '../components/HeroPhotoGrid.astro';
+import { KATEGORIEN } from '../site.config';
+
+const alleArtikel = (await getCollection('artikel', ({ data }) => !data.draft)).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const neuesteArtikel = alleArtikel.slice(0, 9);
+const kategorieEintraege = Object.entries(KATEGORIEN);
+---
+
+<Layout>
+	<section class="relative overflow-hidden">
+		<div
+			class="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center"
+		>
+			<div>
+				<h1 class="max-w-2xl text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+					Kaufberatung, Tests &amp; Guides für <span class="text-accent">Foto-Equipment</span>
+				</h1>
+				<p class="mt-4 max-w-xl text-lg text-slate-600">
+					SHUTTERMAG hilft dir, die richtige Kamera, das passende Objektiv und sinnvolles Zubehör zu
+					finden – unabhängig recherchiert und praxisnah erklärt.
+				</p>
+				<div class="mt-8 flex flex-wrap gap-2">
+					{
+						kategorieEintraege.map(([slug, { label }]) => (
+							<a
+								href={`/kategorie/${slug}/`}
+								class="rounded-full border border-black/10 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-black hover:text-slate-900"
+							>
+								{label}
+							</a>
+						))
+					}
+				</div>
+			</div>
+			<HeroPhotoGrid />
+		</div>
+	</section>
+
+	<section id="neueste-artikel" class="mx-auto max-w-6xl scroll-mt-24 px-4 pt-4 pb-16 sm:pt-8">
+		<h2 class="mb-6 text-xl font-semibold text-slate-900">Neueste Artikel</h2>
+		{
+			neuesteArtikel.length > 0 ? (
+				<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+					{neuesteArtikel.map((artikel) => (
+						<ArtikelCard artikel={artikel} />
+					))}
+				</div>
+			) : (
+				<p class="text-slate-500">Noch keine Artikel veröffentlicht.</p>
+			)
+		}
+	</section>
+
+	<section class="bg-slate-50">
+		<div class="mx-auto max-w-6xl px-4 py-16">
+			<h2 class="mb-6 text-xl font-semibold text-slate-900">Kategorien</h2>
+			<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+				{
+					kategorieEintraege.map(([slug, { label, beschreibung }]) => (
+						<a
+							href={`/kategorie/${slug}/`}
+							class="rounded-2xl border border-black/10 bg-white p-5 transition hover:border-black"
+						>
+							<h3 class="font-semibold text-slate-900">
+								{label}
+								<span class="ml-1 text-accent transition group-hover:translate-x-0.5">→</span>
+							</h3>
+							<p class="mt-1 text-sm text-slate-600">{beschreibung}</p>
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</Layout>

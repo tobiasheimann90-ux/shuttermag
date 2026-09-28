@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ArtikelCard from '../../components/ArtikelCard.astro';
+import { kategorien } from '../../content.config';
+import { KATEGORIEN } from '../../site.config';
+
+export async function getStaticPaths() {
+	return kategorien.map((kategorie) => ({ params: { kategorie } }));
+}
+
+const { kategorie } = Astro.params;
+const info = KATEGORIEN[kategorie];
+const kategorieEintraege = Object.entries(KATEGORIEN);
+
+const artikelInKategorie = (
+	await getCollection('artikel', ({ data }) => !data.draft && data.kategorie === kategorie)
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title={`${info.label} · SHUTTERMAG`} description={info.beschreibung}>
+	<section class="mx-auto max-w-6xl px-4 py-12">
+		<h1 class="text-3xl font-bold tracking-tight text-slate-900">{info.label}</h1>
+		<p class="mt-2 max-w-2xl text-slate-600">{info.beschreibung}</p>
+
+		<div class="mt-8 flex flex-wrap gap-2">
+			{
+				kategorieEintraege.map(([slug, { label }]) => {
+					const aktiv = slug === kategorie;
+					return (
+						<a
+							href={`/kategorie/${slug}/`}
+							class={
+								aktiv
+									? 'rounded-full bg-black px-4 py-2 text-sm font-medium text-white'
+									: 'rounded-full border border-black/10 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-black hover:text-slate-900'
+							}
+						>
+							{label}
+						</a>
+					);
+				})
+			}
+		</div>
+	</section>
+	<section class="mx-auto max-w-6xl px-4 pb-16">
+		{
+			artikelInKategorie.length > 0 ? (
+				<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+					{artikelInKategorie.map((artikel) => (
+						<ArtikelCard artikel={artikel} />
+					))}
+				</div>
+			) : (
+				<p class="text-slate-500">In dieser Kategorie sind noch keine Artikel veröffentlicht.</p>
+			)
+		}
+	</section>
+</Layout>
