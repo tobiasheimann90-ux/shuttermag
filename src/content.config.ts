@@ -31,6 +31,9 @@ const artikel = defineCollection({
 			tags: z.array(z.string()).default([]),
 			// true sobald der Artikel mind. einen Affiliate-Link enthält -> Pflichthinweis wird angezeigt
 			enthaeltAffiliateLinks: z.boolean().default(true),
+			// Manuell kuratierte Hervorhebung auf der Startseite, solange keine echten Analytics-Daten
+			// für "meistgelesen" vorliegen.
+			featured: z.boolean().default(false),
 			draft: z.boolean().default(false),
 		}),
 });

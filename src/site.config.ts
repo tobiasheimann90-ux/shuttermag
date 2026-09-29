@@ -2,7 +2,7 @@
 // Platzhalter hier anpassen, sobald Domain feststeht (wirkt sich auch auf astro.config.mjs `site` aus).
 export const SITE = {
 	name: 'SHUTTERMAG',
-	title: 'SHUTTERMAG – Fotografie-Technik, Tests & Kaufberatung',
+	title: 'SHUTTERMAG: Fotografie-Technik, Tests & Kaufberatung',
 	description:
 		'Unabhängige Kaufberatungen, Tests und Praxis-Guides rund um Kamera-Equipment: Kameras, Objektive, Zubehör und mehr.',
 	url: 'https://shuttermag.de',

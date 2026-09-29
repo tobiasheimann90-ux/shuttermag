@@ -4,6 +4,10 @@
 // Preise schwanken laufend und Modelle werden abgelöst - vor Launch mit aktuellen,
 // geprüften Werten ersetzen. Sobald der Katalog wächst, lohnt sich eine echte Content
 // Collection (src/content.config.ts) statt dieser Datei - für den ersten Prototyp reicht das.
+//
+// Pflege-Prinzip: neue Modelle ergänzen, alte NICHT automatisch entfernen, nur weil ein
+// Nachfolger erschienen ist. Ein älteres Modell bleibt oft die bessere, günstigere Wahl.
+// Nur rausnehmen, wenn nicht mehr neu kaufbar oder technisch eindeutig überholt.
 
 export type Sensorformat = 'aps-c' | 'vollformat' | 'mft';
 export type UseCase = 'reise' | 'portrait' | 'youtube' | 'allround' | 'action';

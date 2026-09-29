@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const schritte = [
+	{
+		nummer: '1',
+		titel: 'Finde deine erste Kamera',
+		text: 'Budget und Einsatzzweck eingeben, passende Empfehlung bekommen. Kein Fachwissen nötig.',
+		href: '/kamera-finder/',
+		linkText: 'Zum Kamera-Finder',
+	},
+	{
+		nummer: '2',
+		titel: 'Verstehe die Grundlagen',
+		text: 'Sensorformat, Brennweite, Blende: kurz erklärt, ohne Fachchinesisch, direkt in unseren Kaufberatungen.',
+		href: '/kategorie/kameras/',
+		linkText: 'Kaufberatungen ansehen',
+	},
+	{
+		nummer: '3',
+		titel: 'Baue dein Set-up aus',
+		text: 'Objektive, Zubehör, Licht: wenn die Kamera steht, geht es an die Ergänzungen.',
+		href: '/kategorie/zubehoer/',
+		linkText: 'Zubehör entdecken',
+	},
+];
+---
+
+<Layout
+	title="Neu in der Fotografie? Starte hier · SHUTTERMAG"
+	description="Der Einsteiger-Guide von SHUTTERMAG: In drei Schritten von der ersten Kamera zum eigenen Set-up."
+>
+	<section class="mx-auto max-w-3xl px-4 py-16">
+		<h1 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+			Neu in der Fotografie? Starte hier.
+		</h1>
+		<p class="mt-4 text-slate-600">
+			Du bist unsicher, welche Kamera oder welches Objektiv du kaufen sollst? Hier findest du
+			einen strukturierten Einstieg, ohne dich durch hunderte Artikel klicken zu müssen.
+		</p>
+
+		<div class="mt-10 space-y-6">
+			{
+				schritte.map((schritt) => (
+					<a
+						href={schritt.href}
+						class="flex gap-4 rounded-2xl border border-black/10 p-6 transition hover:-translate-y-0.5 hover:shadow-lg"
+					>
+						<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent/10 text-sm font-bold text-accent">
+							{schritt.nummer}
+						</span>
+						<div>
+							<h2 class="font-semibold text-slate-900">{schritt.titel}</h2>
+							<p class="mt-1 text-sm text-slate-600">{schritt.text}</p>
+							<span class="mt-2 inline-block text-sm font-semibold text-accent">
+								{schritt.linkText} →
+							</span>
+						</div>
+					</a>
+				))
+			}
+		</div>
+	</section>
+</Layout>

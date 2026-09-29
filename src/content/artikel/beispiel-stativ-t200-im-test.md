@@ -1,6 +1,6 @@
 ---
 title: "Beispiel-Stativ T200 im Test: Solide Basis für Einsteiger"
-description: "Beispiel-Review zur Veranschaulichung der Test-Vorlage – mit Platzhalter-Produktdaten."
+description: "Beispiel-Review zur Veranschaulichung der Test-Vorlage, mit Platzhalter-Produktdaten."
 pubDate: 2026-01-20
 kategorie: zubehoer
 typ: review

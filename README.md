@@ -35,7 +35,7 @@ Content Collections (Markdown/MDX) und Tailwind CSS.
 1. Passende Vorlage aus `templates/` (`kaufberatung.md`, `review.md`, `vergleich.md`,
    `guide.md`) nach `src/content/artikel/<slug>.md` kopieren.
 2. Frontmatter ausfüllen (`title`, `description`, `pubDate`, `kategorie`, `typ`, ...).
-3. `draft: true` lassen, bis der Artikel fertig ist – Draft-Artikel werden nicht gebaut/gelistet.
+3. `draft: true` lassen, bis der Artikel fertig ist. Draft-Artikel werden nicht gebaut/gelistet.
 4. Inhalt schreiben, `draft: false` setzen zum Veröffentlichen.
 
 Kategorien und Artikeltypen sind in `src/content.config.ts` (Zod-Schema, erzwungen)
@@ -53,6 +53,23 @@ Redirect-Layer (`/go/<slug>/`, statisch generiert, kein Server nötig):
 Vorteile: Ziel-URL bei Programmwechsel oder totem Link nur an einer Stelle ändern (nicht in
 jedem Artikel), einheitlicher Punkt für späteres Klick-Tracking, `/go/` ist in `robots.txt`
 gesperrt und aus der Sitemap ausgeschlossen (keine unnötige Indexierung von Redirect-Seiten).
+
+## Produktdaten aktuell halten
+
+Betrifft aktuell `src/data/kameras.ts`, künftig auch eine mögliche Objektiv-Datenbank.
+
+**Neue Modelle mitbekommen:**
+- RSS-Feeds bündeln (z. B. mit Feedly oder Inoreader): Hersteller-Newsrooms (Sony, Canon,
+  Nikon, Fujifilm, Panasonic) plus Fachmedien (PetaPixel, Fstoppers, Photography Life,
+  photoscala.de)
+- Rumor-Sites (SonyAlphaRumors, CanonRumors, NikonRumors, 43Rumors, FujiRumors) für Vorlauf,
+  aber erst nach offizieller Bestätigung in die Datenbank übernehmen
+- Saisonale Fixpunkte im Blick behalten: CP+ (Februar), CES (Januar)
+
+**Wichtiges Prinzip: neue Modelle ergänzen, alte nicht automatisch rauswerfen.** Ein
+Vorgängermodell bleibt oft eine gute, günstigere Empfehlung, auch wenn längst ein Nachfolger
+draußen ist. Nur entfernen, wenn ein Modell nicht mehr neu kaufbar oder technisch eindeutig
+überholt ist (z. B. kein brauchbarer Autofokus mehr, extrem veraltete Sensor-Technik).
 
 ## Commands
 
@@ -78,7 +95,7 @@ gesperrt und aus der Sitemap ausgeschlossen (keine unnötige Indexierung von Red
 - [ ] Hosting-Anbieter gewählt und Deployment eingerichtet
 - [ ] Analytics (z. B. GA4 oder datenschutzfreundliche Alternative) eingebunden
 - [ ] Google Search Console eingerichtet, Sitemap eingereicht
-- [ ] Social-Share-Bild (OG-Image, 1200×630) gestalten – aktuell kein Default gesetzt
+- [ ] Social-Share-Bild (OG-Image, 1200×630) gestalten, aktuell kein Default gesetzt
 - [ ] Echte Kontakt-E-Mail in `src/pages/kontakt.astro` eintragen
 
 **Content**

@@ -10,3 +10,14 @@
 body {
 	font-family: var(--font-sans);
 }
+
+/* Ersetzt den nativen Select-Pfeil, der Innenabstände ignoriert, durch ein eigenes
+   Chevron mit gleichem Abstand zum Rand wie der Text auf der linken Seite. */
+.select-chevron {
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 4.5L6 8l3.5-3.5' stroke='%2364748b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 1rem center;
+	background-size: 12px 12px;
+	padding-right: 2.5rem;
+}

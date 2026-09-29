@@ -8,6 +8,7 @@ heroImage: ./_images/studio-setup-mikrofon.jpg
 heroImageAlt: "Content-Creator-Setup mit Schreibtisch, Stuhl und Mikrofon"
 tags: ["youtube", "setup", "content-creation"]
 enthaeltAffiliateLinks: true
+featured: true
 draft: false
 ---
 
@@ -15,13 +16,13 @@ _Hinweis: Dies ist ein Beispielartikel zur Veranschaulichung der Praxis-Guide-Vo
 
 ## Für welchen Use-Case ist dieser Guide?
 
-Du willst mit YouTube-Videos starten und brauchst ein sinnvolles Set an Kamera, Ton- und Lichttechnik – ohne dein Budget zu sprengen. Dieser Guide zeigt beispielhaft den Aufbau eines solchen Setup-Artikels.
+Du willst mit YouTube-Videos starten und brauchst ein sinnvolles Set an Kamera, Ton- und Lichttechnik, ohne dein Budget zu sprengen. Dieser Guide zeigt beispielhaft den Aufbau eines solchen Setup-Artikels.
 
 ## Das empfohlene Setup
 
 ### Kamera
 
-[Platzhalter: Empfehlung für eine videotaugliche Einsteigerkamera mit Begründung – Autofokus, Klappdisplay, Akkulaufzeit.]
+[Platzhalter: Empfehlung für eine videotaugliche Einsteigerkamera mit Begründung: Autofokus, Klappdisplay, Akkulaufzeit.]
 
 ### Mikrofon
 
@@ -41,7 +42,7 @@ Du willst mit YouTube-Videos starten und brauchst ein sinnvolles Set an Kamera, 
 
 ## Praxistipps
 
-- Gutes Licht ist wichtiger als eine teure Kamera – hier zuerst investieren.
+- Gutes Licht ist wichtiger als eine teure Kamera. Hier zuerst investieren.
 - Externes Mikrofon schlägt fast immer das eingebaute Kameramikrofon.
 
 ## Fazit

@@ -1,28 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-
-const tools = [
-	{
-		titel: 'Kamera-Finder',
-		beschreibung:
-			'Budget und Einsatzzweck eingeben, passende Kameras filtern und vergleichen.',
-		href: '/kamera-finder/',
-		status: 'verfuegbar' as const,
-	},
-	{
-		titel: 'Objektiv-Vergleichs-Tool',
-		beschreibung: 'Objektive nach Brennweite, Blende, System und Preis filtern und direkt vergleichen.',
-		href: '/tools/objektiv-vergleich/',
-		status: 'geplant' as const,
-	},
-	{
-		titel: 'Setup-Konfigurator',
-		beschreibung:
-			'Use-Case und Budget wählen (Reise, YouTube, Produktfotografie) und ein komplettes Equipment-Paket vorgeschlagen bekommen.',
-		href: '/tools/setup-konfigurator/',
-		status: 'geplant' as const,
-	},
-];
+import { tools } from '../../data/tools';
 ---
 
 <Layout

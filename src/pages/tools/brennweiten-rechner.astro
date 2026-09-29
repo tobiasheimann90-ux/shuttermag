@@ -1,0 +1,115 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { sensortypen } from '../../data/sensoren';
+---
+
+<Layout
+	title="Brennweiten-Rechner: Crop-Faktor zwischen Sensorformaten · SHUTTERMAG"
+	description="Rechne eine Brennweite zwischen Vollformat, APS-C, Micro Four Thirds und 1-Zoll-Sensor um."
+>
+	<section class="mx-auto max-w-3xl px-4 py-16">
+		<a href="/tools/" class="text-sm font-semibold text-accent hover:underline"> ← Alle Tools </a>
+
+		<h1 class="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+			Brennweiten-Rechner
+		</h1>
+		<p class="mt-4 max-w-xl text-slate-600">
+			Ein 50mm-Objektiv sieht auf einer Vollformatkamera anders aus als auf einer APS-C-Kamera.
+			Gib deine Brennweite und den Ausgangssensor ein, wir zeigen dir das Vollformat-Äquivalent
+			für alle gängigen Sensorformate.
+		</p>
+
+		<div class="mt-10 grid gap-6 sm:grid-cols-2">
+			<div>
+				<label for="brennweite-input" class="text-sm font-semibold text-slate-700">
+					Brennweite (mm)
+				</label>
+				<input
+					id="brennweite-input"
+					type="number"
+					min="1"
+					step="1"
+					value="50"
+					class="mt-2 w-full rounded-full border border-black/10 px-4 py-2.5 text-sm focus:border-black focus:outline-none"
+				/>
+			</div>
+			<div>
+				<label for="sensor-select" class="text-sm font-semibold text-slate-700">
+					Ausgangssensor
+				</label>
+				<select
+					id="sensor-select"
+					class="select-chevron mt-2 w-full rounded-full border border-black/10 py-2.5 pl-4 text-sm focus:border-black focus:outline-none"
+				>
+					{
+						sensortypen.map((s) => (
+							<option value={s.slug} selected={s.slug === 'vollformat'}>
+								{s.label} (×{s.cropFaktor})
+							</option>
+						))
+					}
+				</select>
+			</div>
+		</div>
+
+		<div class="mt-8 overflow-hidden rounded-2xl border border-black/10">
+			<table class="w-full text-sm">
+				<thead>
+					<tr class="border-b border-black/10 bg-slate-50 text-left">
+						<th class="px-4 py-3 font-medium text-slate-500">Sensorformat</th>
+						<th class="px-4 py-3 font-medium text-slate-500">Entsprechende Brennweite</th>
+					</tr>
+				</thead>
+				<tbody>
+					{
+						sensortypen.map((s) => (
+							<tr data-sensor-row={s.slug} class="border-b border-black/5 last:border-b-0">
+								<td class="px-4 py-3 text-slate-900">{s.label}</td>
+								<td data-wert class="px-4 py-3 font-semibold text-slate-900">
+									{'–'}
+								</td>
+							</tr>
+						))
+					}
+				</tbody>
+			</table>
+		</div>
+
+		<div class="mt-12 rounded-2xl border border-black/10 bg-slate-50 p-6">
+			<h2 class="text-sm font-semibold uppercase tracking-wider text-slate-500">
+				Warum gibt es das überhaupt?
+			</h2>
+			<p class="mt-3 text-sm text-slate-700">
+				Nicht jede Kamera hat den gleichen Sensor. Ein kleinerer Sensor sieht bei gleicher
+				Brennweite einen engeren Bildausschnitt als ein großer, so als würdest du in das Bild
+				hineinzoomen. Der Crop-Faktor beschreibt, wie stark dieser Effekt ausfällt. Als
+				gemeinsamer Vergleichsmaßstab hat sich das Vollformat durchgesetzt, weil es historisch dem
+				klassischen 35mm-Kleinbildfilm entspricht. Wenn du also von "Vollformat-Äquivalent" liest,
+				ist genau das gemeint: wie die Brennweite auf einer Vollformatkamera wirken würde.
+			</p>
+		</div>
+	</section>
+</Layout>
+
+<script define:vars={{ sensortypen }}>
+	const brennweiteInput = document.querySelector('#brennweite-input');
+	const sensorSelect = document.querySelector('#sensor-select');
+
+	function berechne() {
+		const brennweite = parseFloat(brennweiteInput.value) || 0;
+		const ausgangsSensor = sensortypen.find((s) => s.slug === sensorSelect.value);
+		const vollformatAequivalent = brennweite * ausgangsSensor.cropFaktor;
+
+		sensortypen.forEach((s) => {
+			const zeile = document.querySelector(`[data-sensor-row="${s.slug}"]`);
+			const wertZelle = zeile.querySelector('[data-wert]');
+			const equivalent = vollformatAequivalent / s.cropFaktor;
+			wertZelle.textContent = `${equivalent.toFixed(1)} mm`;
+			zeile.classList.toggle('bg-accent/5', s.slug === sensorSelect.value);
+		});
+	}
+
+	brennweiteInput.addEventListener('input', berechne);
+	sensorSelect.addEventListener('change', berechne);
+	berechne();
+</script>
