@@ -71,6 +71,14 @@ Vorgängermodell bleibt oft eine gute, günstigere Empfehlung, auch wenn längst
 draußen ist. Nur entfernen, wenn ein Modell nicht mehr neu kaufbar oder technisch eindeutig
 überholt ist (z. B. kein brauchbarer Autofokus mehr, extrem veraltete Sensor-Technik).
 
+**Preise recherchieren: nie den Hersteller-Direktpreis als Marktpreis übernehmen.**
+Hersteller-Shops (Sony, Canon, Nikon, Panasonic, OM System, ...) verlangen oft deutlich mehr
+als der reale Straßenpreis, das ist beim ersten echten Artikel passiert und lag teils über
+300 € daneben. Stattdessen einen Preisvergleich nutzen (z. B. idealo, Geizhals), den "ab"-Preis
+als Richtwert nehmen und bei sehr niedrigen Einzelangeboten kurz auf Händlerbewertung und
+Verfügbarkeit schauen. Bekannte Fotohändler (z. B. Foto Erhardt, Foto Koch, Calumet) sind eine
+gute Referenz, wenn der Preisvergleich sehr breit streut.
+
 ## Commands
 
 | Command             | Aktion                                      |
